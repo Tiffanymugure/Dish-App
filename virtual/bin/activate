@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/amira/Documents/Dishi-App/virtual"
+VIRTUAL_ENV="/Users/jeremykimotho/Documents/Moringa-Core/Python/Group/dishi/Dish-App/virtual"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
