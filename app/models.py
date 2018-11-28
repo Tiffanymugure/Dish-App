@@ -1,10 +1,11 @@
+from flask import jsonify
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 from . import login_manager
 
-@login_manager
+@login_manager.user_loader
 def load_user(user_id):
   return User.query.get(int(user_id))
 
@@ -43,9 +44,13 @@ class User(UserMixin, db.Model):
       db.session.add(master)
       db.session.commit()
 
-  def __repr__(self):
-    return f'User {self.username}'
+  @classmethod
+  def get_users(cls):
+    users = User.query.all()
+    return jsonify({'users':users})
 
+  
+  
 
 class Recipes(UserMixin, db.Model):
   __tablename__='recipes'
@@ -68,7 +73,7 @@ class Recipes(UserMixin, db.Model):
     return recipe
 
   @classmethod
-  def get_recipes(cls, id):
+  def get_recipes(cls):
     recipes = Recipes.query.all()
     return recipes  
 
