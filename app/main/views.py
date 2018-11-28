@@ -18,9 +18,12 @@ def index():
     '''
     return render_template('index.html', users=users)
 
-@main.route('/users')
+@main.route('/users/get', methods=['GET', 'POST'])
 def get_users():
   users = User.query.all()
   new_users= [(user.username, user.pass_secure) for user in users]
   d = {key: value for (key, value) in new_users}
   return jsonify({'users':d})
+
+# @main.route('/users/post')
+# def post_users():
