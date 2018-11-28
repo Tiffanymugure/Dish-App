@@ -5,18 +5,16 @@ from flask_login import login_required, current_user
 from .. import db
 from datetime import datetime
 
-
-
 # Views
 @main.route('/')
 def index():
-    users = User.query.all()
-    print(users)
+  users = User.query.all()
+  print(users)
 
-    '''
-    View root page function that returns the index page and its data
-    '''
-    return render_template('index.html', users=users)
+  '''
+  View root page function that returns the index page and its data
+  '''
+  return render_template('index.html', users=users)
 
 @main.route('/users/get', methods=['GET', 'POST'])
 def get_users():
@@ -25,5 +23,3 @@ def get_users():
   d = {key: value for (key, value) in new_users}
   return jsonify({'users':d})
 
-# @main.route('/users/post')
-# def post_users():
