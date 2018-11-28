@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .vscode .env
 __pycache__/
 *.pyc
@@ -5,4 +6,9 @@ instance/config.py
 .vscode/
 .idea
 virtual
+=======
+virtual/
+*.pyc
+instance/
+>>>>>>> origin/database
 start.sh
