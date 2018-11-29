@@ -49,8 +49,6 @@ class User(UserMixin, db.Model):
     users = User.query.all()
     return users
 
-  
-  
 
 class Recipes(UserMixin, db.Model):
   __tablename__='recipes'
