@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash, request, session
 from flask_login import login_user, logout_user, login_required
 from . import auth
-from ..models import User
+from ..models import User, Recipes
 from .forms import RegistrationForm, LoginForm
 from .. import db
 from ..email import welcome_mail_message
@@ -10,6 +10,7 @@ from ..email import welcome_mail_message
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
   User.init_db() 
+  Recipes.init_db_recipe()
   form = RegistrationForm()
 
   if form.validate_on_submit():
@@ -26,6 +27,7 @@ def register():
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
   User.init_db()
+  Recipes.init_db_recipe()
   login_form = LoginForm()
 
   if login_form.validate_on_submit():
