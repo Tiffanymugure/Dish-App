@@ -47,7 +47,7 @@ class User(UserMixin, db.Model):
   @classmethod
   def get_users(cls):
     users = User.query.all()
-    return jsonify({'users':users})
+    return users
 
   
   

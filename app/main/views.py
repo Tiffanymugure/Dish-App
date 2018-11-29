@@ -23,3 +23,6 @@ def get_users():
   d = {key: value for (key, value) in new_users}
   return jsonify({'users':d})
 
+@main.route('/recipes', methods=['GET', 'POST'])
+def write_recipes():
+  
