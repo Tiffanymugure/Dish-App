@@ -10,6 +10,7 @@ from ..email import welcome_mail_message
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
   User.init_db() 
+  Recipes.init_db_recipe()
   form = RegistrationForm()
 
   if form.validate_on_submit():
@@ -26,6 +27,7 @@ def register():
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
   User.init_db()
+  Recipes.init_db_recipe()
   login_form = LoginForm()
 
   if login_form.validate_on_submit():

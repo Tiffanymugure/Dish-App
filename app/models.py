@@ -70,6 +70,13 @@ class Recipes(UserMixin, db.Model):
     recipe = Recipes.query.filter_by(id=id).first()
     return recipe
 
+  def init_db_recipe():
+    if Recipes.query.count() == 0:
+      default = Recipes(category='default', recipe='default recipe', image_path='image_path', user_id=1)
+
+      db.session.add(default)
+      db.session.commit()
+
   @classmethod
   def get_recipes(cls):
     recipes = Recipes.query.all()

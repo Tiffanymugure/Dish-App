@@ -10,7 +10,6 @@ from datetime import datetime
 def index():
   users = User.query.all()
   print(users)
-
   '''
   View root page function that returns the index page and its data
   '''
@@ -24,5 +23,9 @@ def get_users():
   return jsonify({'users':d})
 
 @main.route('/recipes', methods=['GET', 'POST'])
-def write_recipes():
+def get_recipes():
+  recipes = Recipes.query.all()
+  new_recipes = [(recipe.user_id, recipe.recipe) for recipe in recipes]
+  d = {key: value for (key, value) in new_recipes}
+  return jsonify({'recipes':d})
   
