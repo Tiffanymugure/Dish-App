@@ -45,6 +45,11 @@ class User(UserMixin, db.Model):
       db.session.commit()
 
   @classmethod
+  def get_user(cls, id):
+    user = cls.query.filter_by(id=id).first()
+    return user.username
+
+  @classmethod
   def get_users(cls):
     users = User.query.all()
     return users
@@ -57,8 +62,6 @@ class Recipes(UserMixin, db.Model):
   category  = db.Column(db.String(255))
   recipe = db.Column(db.String)
   image_path = db.Column(db.String)
-
-  favourites = db.relationship('Favourites', backref='favourites', lazy='dynamic')
   
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
@@ -70,12 +73,14 @@ class Recipes(UserMixin, db.Model):
     recipe = Recipes.query.filter_by(id=id).first()
     return recipe
 
+
   def init_db_recipe():
     if Recipes.query.count() == 0:
       default = Recipes(category='default', recipe='default recipe', image_path='image_path', user_id=1)
-
-      db.session.add(default)
+      default1 = Recipes(category='default', recipe='default recipe 2', image_path='image_path', user_id=1)
+      db.session.add_all([default, default1])
       db.session.commit()
+
 
   @classmethod
   def get_recipes(cls):
@@ -87,9 +92,7 @@ class Favourites(UserMixin, db.Model):
 
   id = db.Column(db.Integer, primary_key  = True)
 
-  recipe_image_path = db.Column(db.Integer, db.ForeignKey('recipes.image_path'))
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-  recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.id'))
 
   def save_recipe(self):
     db.session.add(self)
