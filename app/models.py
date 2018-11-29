@@ -79,9 +79,8 @@ class Favourites(UserMixin, db.Model):
   __tablename__='favourites'
 
   id = db.Column(db.Integer, primary_key  = True)
-  recipe = db.Column(db.String)
-  image_path = db.Column(db.String)
 
+  recipe_image_path = db.Column(db.Integer, db.ForeignKey('recipes.image_path'))
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.id'))
 
